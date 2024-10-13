@@ -1,25 +1,24 @@
-import {react} from 'react';
+// App.js
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import HomeScreen from './screens/HomeScreen';
-import LoansScreen from './screens/LoansScreen';
-import SavingsScreen from './screens/SavingsScreen';
-import { SafeAreaView, StatusBar } from 'react-native';
+import LoginScreen from './screens/auth/LoginScreen';
+import RegisterScreen from './screens/auth/RegisterScreen';
+import ForgotPasswordScreen from './screens/auth/ForgotPasswordScreen';
 
-
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-  <NavigationContainer> 
-    <SafeAreaView styles = {{flex :1, backgroundColor : '#fff' }}>
-      <StatusBar barStyle="dark-content" />
-      <Stack.Navigator initialRouteName="Home" >
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Loans" component={LoansScreen} />
-        <Stack.Screen name="Savings" component={SavingsScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
       </Stack.Navigator>
-    </SafeAreaView>
     </NavigationContainer>
-  )
+  );
 }

@@ -1,52 +1,33 @@
-import {react} from 'react';
-import { StyleSheet, Text, Button, View } from 'react-native';
-import LoanCalculator from '../components/LoanCalculator';
+// screens/HomeScreen.js
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 
-const HomeScreen = ({navigation}) => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>welcome to latentSavings Application</Text>
-           
+const HomeScreen = ({ navigation }) => {
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigation.replace('Login');    // Navigate back to LoginScreen on logout
+  };
 
-        <Button
-        title= "Access Loans"
-        onPress={() => navigation.navigate('Loans')}    
-        />   
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome to Latent Savings</Text>
+      <Button title="Logout" onPress={handleLogout} />
+    </View>
+  );
+};
 
-        <Button
-        title = "Fixed Deposits"
-        onPress={() => navigation.navigate('Savings')}
-        />
-
-        <LoanCalculator/>
-        
-         </View>
-        
-    );
-}
-
-
-const styles = StyleSheet.create({ 
-    container: {
-        flex : 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 40,
-        margin: 40,
-    },
-
-    title : {
-        fontSize: 24,
-        fontWeight: 'bold',
-        margin : 40,
-    },
-
-    Button : {
-        fontSize: 24,
-        fontWeight: 'bold',
-        margin : 40,
-    }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+  },
 });
-
 
 export default HomeScreen;
